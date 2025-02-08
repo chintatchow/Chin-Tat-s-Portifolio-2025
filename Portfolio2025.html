@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chin Tat’s Portfolio</title>
+  <style>
+    /* 全域重置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      line-height: 1.6;
+      background-color: #000;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .item {
+      flex: 0 0 50%;
+      width: 50%;
+      position: relative;
+    }
+    img, video {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    /* 影片的預設背景，避免黑畫面 */
+    .lazy-video {
+      background: #222;
+      min-height: 200px; /* 避免高度塌陷 */
+    }
+    /* 手機版單欄顯示 */
+    @media (max-width: 768px) {
+      .item {
+        flex: 0 0 100%;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 1 -->
+    <div class="item">
+      <img src="https://bethelight.app/p.1.jpg" alt="圖片 1" loading="lazy">
+    </div>
+    <!-- 2 -->
+    <div class="item">
+      <img src="https://bethelight.app/p.2.jpg" alt="圖片 2" loading="lazy">
+    </div>
+    <!-- 3 -->
+    <div class="item">
+      <video class="lazy-video" autoplay loop muted playsinline data-src="https://bethelight.app/p.3.mp4"></video>
+    </div>
+    <!-- 4 -->
+    <div class="item">
+      <video class="lazy-video" autoplay loop muted playsinline data-src="https://bethelight.app/p.4.mp4"></video>
+    </div>
+    <!-- 5 -->
+    <div class="item">
+      <video class="lazy-video" autoplay loop muted playsinline data-src="https://bethelight.app/p.5.mp4"></video>
+    </div>
+    <!-- 6 -->
+    <div class="item">
+      <video class="lazy-video" autoplay loop muted playsinline data-src="https://bethelight.app/p.6.mp4"></video>
+    </div>
+    <!-- 7 -->
+    <div class="item">
+      <video class="lazy-video" autoplay loop muted playsinline data-src="https://bethelight.app/p.7.mp4"></video>
+    </div>
+    <!-- 8 -->
+    <div class="item">
+      <video class="lazy-video" autoplay loop muted playsinline data-src="https://bethelight.app/p.8.mp4"></video>
+    </div>
+    <!-- 9 -->
+    <div class="item">
+      <img src="https://bethelight.app/p.9.jpg" alt="圖片 9" loading="lazy">
+    </div>
+    <!-- 10 -->
+    <div class="item">
+      <img src="https://bethelight.app/p.10.jpg" alt="圖片 10" loading="lazy">
+    </div>
+    <!-- 11 -->
+    <div class="item">
+      <img src="https://bethelight.app/p.11.jpg" alt="圖片 11" loading="lazy">
+    </div>
+    <!-- 12 -->
+    <div class="item">
+      <img src="https://bethelight.app/p.12.jpg" alt="圖片 12" loading="lazy">
+    </div>
+    <!-- 13 -->
+    <div class="item">
+      <video class="lazy-video" autoplay loop muted playsinline data-src="https://bethelight.app/p.13.mp4"></video>
+    </div>
+    <!-- 14 -->
+    <div class="item">
+      <video class="lazy-video" autoplay loop muted playsinline data-src="https://bethelight.app/p.14.mp4"></video>
+    </div>
+    <!-- 15 -->
+    <div class="item">
+      <video class="lazy-video" autoplay loop muted playsinline data-src="https://bethelight.app/p.15.mp4"></video>
+    </div>
+    <!-- 16 -->
+    <div class="item">
+      <img src="https://bethelight.app/p.16.jpg" alt="圖片 16" loading="lazy">
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const videos = document.querySelectorAll(".lazy-video");
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            let video = entry.target;
+            let videoSrc = video.getAttribute("data-src");
+
+            if (videoSrc) {
+              video.innerHTML = `<source src="${videoSrc}" type="video/mp4">`;
+              video.load();
+              video.removeAttribute("data-src"); // 確保只載入一次
+            }
+            obs.unobserve(video);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      videos.forEach(video => observer.observe(video));
+    });
+  </script>
+</body>
+</html>
